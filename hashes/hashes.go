@@ -3,6 +3,8 @@ package hashes
 import (
 	"crypto/sha256"
 	"crypto/sha512"
+	"crypto/sha1"
+	"crypto/md5"
 	"crypto/hmac"
 	"encoding/hex"
 	"golang.org/x/crypto/sha3"
@@ -19,6 +21,10 @@ const (
 	SHA3_512         = "SHA3-512"
 	BLAKE2b_512      = "BLAKE2b-512"
 	HMAC_SHA256      = "HMAC-SHA256"
+	SHA1             = "SHA-1"
+	MD5              = "MD5"
+	SHA3_224         = "SHA3-224"
+	BLAKE2s_128      = "BLAKE2s-128"
 	SECRET_KEY_HMAC_SHA256 = "superSecret"
 )
 
@@ -48,9 +54,12 @@ var hashes = []hashType{
 	{"SHA3-512", func(data string) string { return hashData(sha3.New512(), data) }},
 	{"BLAKE2b-512", func(data string) string { h, _ := blake2b.New512(nil); return hashData(h, data) }},
 	{"HMAC-SHA256", func(data string) string { return hashData(hmac.New(sha256.New, []byte(SECRET_KEY_HMAC_SHA256)), data) }},
+	{"SHA-1", func(data string) string { return hashData(sha1.New(), data) }},
+	{"MD5", func(data string) string { return hashData(md5.New(), data) }},
+	{"SHA3-224", func(data string) string { return hashData(sha3.New224(), data) }},
+	{"BLAKE2s-128", func(data string) string { h, _ := blake2s.New128(nil); return hashData(h, data) }},
 }
 
-// GetHashes returns a list of available hash functions
 func GetHashes() []hashType {
 	return hashes
 }
@@ -63,4 +72,3 @@ func IsHash(hashes []hashType, possibleHash string) (bool, *hashType) {
 	}
 	return false, nil
 }
-

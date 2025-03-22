@@ -8,6 +8,13 @@ import (
 	"makeYourHashPassword/errors"
 )
 
+const (
+	lenValidArgs = 2
+	lenValidArgsWithFlag = 1
+	argIndexAlgorithm = 0
+	argIndexPassword = 1
+)
+
 func main() {
 	args := os.Args[1:]
 
@@ -16,19 +23,19 @@ func main() {
 		return
 	}
 	
-	isCommand, c := commands.IsCommand(commands.GetCommands(), args[0])
-	if len(args) == 1 && isCommand {
+	isCommand, c := commands.IsCommand(args[0])
+	if len(args) == lenValidArgsWithFlag && isCommand {
 		c.Invoke()
 		return
 	}
 
-	if len(args) != 2 {
+	if len(args) != lenValidArgs {
 		fmt.Println(errors.ErrorInvokingProgram{}.Error())
 		return
 	}
 
-	algorithm := args[0]
-	password := args[1]
+	algorithm := args[argIndexAlgorithm]
+	password := args[argIndexPassword]
 
 	isHash, h := hashes.IsHash(hashes.GetHashes(), algorithm)
 	if isHash {

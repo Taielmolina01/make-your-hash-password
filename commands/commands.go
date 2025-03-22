@@ -24,7 +24,7 @@ var commands = []command{
 		name: helpCommand, 
 		Invoke: func() {
 			fmt.Println("You must call the executable like `executable algorithm password`")
-			fmt.Println("Being `executable` the executable created when you compile main.go")
+			fmt.Println("Being `executable` the executable created when you compile main.go (by default is `createYourPassword`)")
 			fmt.Println("For algorithm you have these options: ")
 			fmt.Println("And password is your password you want to hash")
 		},
@@ -40,12 +40,12 @@ var commands = []command{
 	},
 }
 
-func GetCommands() []command {
+func getCommands() []command {
 	return commands
 }
 
-func IsCommand(commands []command, possibleCommand string) (bool, *command) {
-	for _, c := range commands {
+func IsCommand(possibleCommand string) (bool, *command) {
+	for _, c := range getCommands() {
 		if c.getCommandName() == possibleCommand {
 			return true, &c
 		}
