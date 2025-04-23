@@ -68,11 +68,8 @@ func getHashesString() string {
 	var hashesString string
 	for _, v := range hashes.GetHashes() {
 		hashesString += v.GetHashName() + "\n"
-	}
-	if len(hashesString) > 0 {
-		hashesString = hashesString[:len(hashesString)-1]
-	}
-	return hashesString
+	}		
+	return hashesString[:len(hashesString)-1]
 }
 
 func IsCommand(possibleCommand string, commands []command) (bool, *command) {
