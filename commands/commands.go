@@ -10,8 +10,10 @@ const (
 	listAlgorithmsCommand   = "-l"
 	helpCommandMessage = `You must call the executable like 'executable algorithm password maxLengthPassword optional[numberOfRotations]'
 Being 'executable' the executable created when you compile main.go (by default is 'createYourPassword')
+
 For algorithm you have these options:
 %s
+
 Password is your password you want to hash
 MaxLengthPassword is the number of characters you want for your password
 And the optional arg numberOfRotations is the number of rotations to the right that you want for your password. By default is 0`

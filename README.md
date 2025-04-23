@@ -8,7 +8,9 @@ You must have a go version > 1.23.0 for some hash algorithms. I dont add it like
 
 ## Use
 
-Its easy to use, you have to run `make all` and then run `./myExecutable algorithm yourPassword`.
+Its easy to use, you have to run `make all` and then run `./myExecutable algorithm yourPassword maxLength optional[nunberOfRotations]`.
+
+The maxLength is the length of your password, I add it because usually the social medias and stuffs like that, add a limit to the length of your password, so you can set it directly.
 
 You can see the available algorithms with `./myExecutable -l` and if you forget this file and the above line, you can run `./myExecutable -h`.
 
