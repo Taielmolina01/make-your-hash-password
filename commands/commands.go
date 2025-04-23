@@ -6,12 +6,22 @@ import (
 )
 
 const (
-	helpCommand             = "-help"
+	helpCommand             = "-h"
 	listAlgorithmsCommand   = "-l"
+	helpCommandMessage = `You must call the executable like 'executable algorithm password maxLengthPassword optional[numberOfRotations]'
+Being 'executable' the executable created when you compile main.go (by default is 'createYourPassword')
+For algorithm you have these options:
+%s
+Password is your password you want to hash
+MaxLengthPassword is the number of characters you want for your password
+And the optional arg numberOfRotations is the number of rotations to the right that you want for your password. By default is 0`
+	listAlgorithmsMessage = `The available hashing algorithms are:
+%s`
 )
 
 type command struct {
 	name   string
+	message string
 	Invoke func()
 }
 
@@ -19,36 +29,52 @@ func (c command) getCommandName() string {
 	return c.name
 }
 
-var commands = []command{
-	{
-		name: helpCommand, 
-		Invoke: func() {
-			fmt.Println("You must call the executable like `executable algorithm password`")
-			fmt.Println("Being `executable` the executable created when you compile main.go (by default is `createYourPassword`)")
-			fmt.Println("For algorithm you have these options: ")
-			for _, v := range hashes.GetHashes() {
-				fmt.Println(v.GetHashName())
-			}
-			fmt.Println("And password is your password you want to hash")
-		},
-	},
-	{
-		name: listAlgorithmsCommand, 
-		Invoke: func() {
-			fmt.Println("The available hashing algorithms are: ")
-			for _, v := range hashes.GetHashes() {
-				fmt.Println(v.GetHashName())
-			}
-		},
-	},
+func InitializeCommands() []command {
+	return []command{
+		initializeHelpCommand(),
+		initializeListAlgorithmsCommand(),
+	}
 }
 
-func getCommands() []command {
-	return commands
+func initializeHelpCommand() command {
+	availableAlgorithms := getHashesString()
+	messageHelp := fmt.Sprintf(helpCommandMessage, availableAlgorithms)
+	cmd := command{
+		name:    helpCommand,
+		message: messageHelp,
+	}
+	cmd.Invoke = func() {
+		fmt.Println(cmd.message)
+	}
+	return cmd
 }
 
-func IsCommand(possibleCommand string) (bool, *command) {
-	for _, c := range getCommands() {
+func initializeListAlgorithmsCommand() command {
+	availableAlgorithms := getHashesString()
+	messageList := fmt.Sprintf(listAlgorithmsMessage, availableAlgorithms)
+	cmd := command{
+		name:    listAlgorithmsCommand,
+		message: messageList,
+	}
+	cmd.Invoke = func() {
+		fmt.Println(cmd.message)
+	}
+	return cmd
+}
+
+func getHashesString() string {
+	var hashesString string
+	for _, v := range hashes.GetHashes() {
+		hashesString += v.GetHashName() + "\n"
+	}
+	if len(hashesString) > 0 {
+		hashesString = hashesString[:len(hashesString)-1]
+	}
+	return hashesString
+}
+
+func IsCommand(possibleCommand string, commands []command) (bool, *command) {
+	for _, c := range commands {
 		if c.getCommandName() == possibleCommand {
 			return true, &c
 		}

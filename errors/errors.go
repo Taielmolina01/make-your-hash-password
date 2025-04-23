@@ -1,7 +1,7 @@
 package errors
 
-type ErrorInvokingProgram struct {}
+type ErrorInvokingProgram struct{}
 
 func (e ErrorInvokingProgram) Error() string {
-	return "Error calling the program\nInvoke the program with -help for more information"
+	return "Error calling the program\nInvoke the program with -h for more information"
 }

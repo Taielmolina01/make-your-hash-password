@@ -10,7 +10,7 @@ You must have a go version > 1.23.0 for some hash algorithms. I dont add it like
 
 Its easy to use, you have to run `make all` and then run `./myExecutable algorithm yourPassword`.
 
-You can see the available algorithms with `./myExecutable -l` and if you forget this file and the above line, you can run `./myExecutable -help`.
+You can see the available algorithms with `./myExecutable -l` and if you forget this file and the above line, you can run `./myExecutable -h`.
 
 By default the executable name is `createYourPassword`
 
