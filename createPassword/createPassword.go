@@ -18,7 +18,7 @@ const (
 
 func getPassword(h *hashes.HashType, password string, lengthPassword, rotations int) string {
 	hashed := h.HashData(password)
-	hashed = hashed[len(hashed)-rotations:] + hashed[:len(hashed)-rotations]
+	hashed = hashed[len(hashed)-module(rotations, len(hashed)):] + hashed[:len(hashed)-module(rotations, len(hashed))]
 	return hashed[:lengthPassword]
 }
 
