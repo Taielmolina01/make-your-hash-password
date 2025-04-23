@@ -14,7 +14,6 @@ const (
 	argIndexPassword          = 1
 	argIndexMaxLengthPassword = 2
 	argIndexRotatePassword    = 3
-	errorMessageLengthPasswordNot
 )
 
 func getPassword(h *hashes.HashType, password string, lengthPassword, rotations int) string {
