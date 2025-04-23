@@ -1,11 +1,11 @@
-package main 
+package main
 
 import (
 	"fmt"
-	"os"
 	"makeYourHashPassword/commands"
-	"makeYourHashPassword/errors"
 	"makeYourHashPassword/createPassword"
+	"makeYourHashPassword/errors"
+	"os"
 )
 
 const (

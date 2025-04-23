@@ -6,9 +6,9 @@ import (
 )
 
 const (
-	helpCommand             = "-h"
-	listAlgorithmsCommand   = "-l"
-	helpCommandMessage = `You must call the executable like 'executable algorithm password maxLengthPassword optional[numberOfRotations]'
+	helpCommand           = "-h"
+	listAlgorithmsCommand = "-l"
+	helpCommandMessage    = `You must call the executable like 'executable algorithm password maxLengthPassword optional[numberOfRotations]'
 Being 'executable' the executable created when you compile main.go (by default is 'createYourPassword')
 
 For algorithm you have these options:
@@ -22,9 +22,9 @@ And the optional arg numberOfRotations is the number of rotations to the right t
 )
 
 type command struct {
-	name   string
+	name    string
 	message string
-	Invoke func()
+	Invoke  func()
 }
 
 func (c command) getCommandName() string {
@@ -68,7 +68,7 @@ func getHashesString() string {
 	var hashesString string
 	for _, v := range hashes.GetHashes() {
 		hashesString += v.GetHashName() + "\n"
-	}		
+	}
 	return hashesString[:len(hashesString)-1]
 }
 
