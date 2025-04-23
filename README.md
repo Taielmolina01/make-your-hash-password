@@ -20,7 +20,7 @@ Explanation of program's args:
 
 `yourPassword` its ... the password you want to hash and making it more secure!
 
-`maxLength` is the length of your password, I add it because usually the social medias and stuffs like that, add a limit to the length of your password, so you can set it directly.
+`maxLength` is the length of your password. I add it because usually the social medias and stuffs like that, add a limit to the length of your password, so you can set it directly.
 
 `numberOfRotations` is an optional arg if you want to rotate your hash password so its a way to make a new combination for your password.
 
