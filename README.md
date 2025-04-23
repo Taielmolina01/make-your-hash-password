@@ -1,4 +1,4 @@
-# Motivation
+## Motivation
 
 I was a little worry that I used to have the same password and its so easy to know what it was, so I make this little program to generate a more secure one.
 
